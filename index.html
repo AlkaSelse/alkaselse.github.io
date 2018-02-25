@@ -18,22 +18,79 @@
 
 <script type="text/javascript">
 
+//Variables
+var mapSW = [0, 8192], //will be arrays of pixels dimensions; add 1+max zoom variables x 256
+	mapNE = [8192, 0];
+
 // Declare Map Object
-var map = L.map('map').setView([0, 0], 1);
+var map = L.map('map').setView([0, 0], 1); //sets default view location [lat,lng],zoom
 
 // Reference the tils
-L.tileLayer('maps/8192px HexMap/{z}/{x}/{y}.png', {
-	minZoom: 1,
-	maxZoom: 5,
+L.tileLayer('maps/8192px HexMap/{z}/{x}/{y}.png', { //directory location of map tiles
+	minZoom: 1, //Cannot zoom out past this point
+	maxZoom: 5, //prevents breaking when zooming in too far
 	continuousWorld: false,
-	noWrap: true,
+	noWrap: true, //makes single contained image
+	crs: L.CRS.Simple, //changes coordinate reference system to a simple one for pixel use
 }).addTo(map);
 
+map.setMaxBounds(new L.LatLngBounds(
+	map.unproject(mapSW, map.getMaxZoom()),
+	map.unproject(mapNE, map.getMaxZoom()),
+));
 
-// Marker and Popups
+
+// Marker and Popups testing
+//LatLng
+var marker = L.marker([90, -150], { //creates marker object called 'marker' at [lat,lng]
+	draggable: true, //makes the marker draggable
+}).addTo(map); //actually places onto map
+marker.bindPopup('Move this marker to find pixel coordinates!').openPopup(); //attaches popup object to this marker
+
+//Pixels
+var regent_kings_landing = L.marker(map.unproject([4000, 3984], map.getMaxZoom())).addTo(map);
+regent_kings_landing.bindPopup('<b>Test marker!</b>');
+regent_kings_landing.on('mouseover', function (e){this.openPopup();});
+regent_kings_landing.on('mouseout', function (e) {this.closePopup();});
+
+
+//-----MARKER PLACEMENTS-----//
+//The Wall and Beyond
+
+
+//The North
+
+
+//The Iron Islands
+
+
+//The Riverlands
+
+
+//The Vale
+
+
+//The Westerlands
+
+
+//The Reach
+
+
+//The Crownlands
+
+
+//The Stormlands
+
+
+//Dorne
 
 
 
+marker.on('dragend', function(e) {
+	marker.getPopup().setContent('Clicked '+ marker.getLatLng().toString() + '<br />'
+		+ 'Pixels ' + map.project(marker.getLatLng(), map.getMaxZoom().toString()))
+	.openOn(map);
+})
 
 </script>
 
