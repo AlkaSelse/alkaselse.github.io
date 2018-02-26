@@ -40,18 +40,23 @@ map.setMaxBounds(new L.LatLngBounds(
 ));
 
 
-// Marker and Popups testing
-//LatLng
-var marker = L.marker([90, -150], { //creates marker object called 'marker' at [lat,lng]
+//--- Movable Reference Marker to determine pixel coordinates for House placement ---//
+var refmarker = L.marker([90, -150], { //creates marker object called 'marker' at [lat,lng]
 	draggable: true, //makes the marker draggable
-}).addTo(map); //actually places onto map
-marker.bindPopup('Move this marker to find pixel coordinates!').openPopup(); //attaches popup object to this marker
+})
+.addTo(map); //actually places onto map
+refmarker.bindPopup(''); //attaches popup object to this marker
+
+refmarker.on('dragend', function(e) {
+	refmarker.getPopup().setContent('Pixels ' + map.project(refmarker.getLatLng(), map.getMaxZoom().toString()))
+	.openOn(map);
+})
 
 //Pixels
-var regent_kings_landing = L.marker(map.unproject([4000, 3984], map.getMaxZoom())).addTo(map);
-regent_kings_landing.bindPopup('<b>Test marker!</b>');
-regent_kings_landing.on('mouseover', function (e){this.openPopup();});
-regent_kings_landing.on('mouseout', function (e) {this.closePopup();});
+var klanding = L.marker(map.unproject([4000, 3984], map.getMaxZoom()));
+klanding.bindPopup('<b>Test marker!</b>');
+klanding.on('mouseover', function (e) {this.openPopup();});
+klanding.on('mouseout', function (e) {this.closePopup();});
 
 
 //-----MARKER PLACEMENTS-----//
@@ -59,10 +64,13 @@ regent_kings_landing.on('mouseout', function (e) {this.closePopup();});
 
 
 //The North
-
+var winterfell = L.marker(map.unproject([4032, 2120], map.getMaxZoom()));
+winterfell.bindPopup('<b>Winterfell</b>');
+winterfell.on('mouseover', function (e) {this.openPopup();});
+winterfell.on('mouseout', function (e) {this.closePopup();});
 
 //The Iron Islands
-
+var pyke = L.marker(map.unproject([4032, 4000], map.getMaxZoom()));
 
 //The Riverlands
 
@@ -85,12 +93,42 @@ regent_kings_landing.on('mouseout', function (e) {this.closePopup();});
 //Dorne
 
 
+//---- LAYER GROUPS ----//
+var lg_lordp = L.layerGroup([winterfell, klanding, pyke]); //Layer group for Lords Paramount and Crown
 
-marker.on('dragend', function(e) {
-	marker.getPopup().setContent('Clicked '+ marker.getLatLng().toString() + '<br />'
-		+ 'Pixels ' + map.project(marker.getLatLng(), map.getMaxZoom().toString()))
-	.openOn(map);
-})
+var lg_ghouse = L.layerGroup([]);//Layer group for greater noble houses
+
+var lg_lhouse = L.layerGroup([]); //Layer group for lesser noble houses
+
+var lg_drag = L.layerGroup([]); //Layer group for dragon sightings
+
+var lg_rumor = L.layerGroup([]); //Layer group for rumors and events
+
+var lg_army = L.layerGroup([]); //Layer group for armies and naval fleets
+
+var lg_hbord = L.layerGroup([]); //Layer group for House territory borders
+
+var lg_rbord = L.layerGroup([]); //Layer group for region territory borders
+
+var overlays = {
+	"Lords Paramount" : lg_lordp,
+	"Greater Houses" : lg_ghouse,
+	"Lesser Houses" : lg_lhouse,
+	"Dragon Sightings" : lg_drag,
+	"Rumors and Events" : lg_rumor,
+	//"Armies and Navies" : lg_army,
+	//"House Territories" : lg_hbord, - will be a tile layer
+	//"Realm Borders" : lg_rbord, - will be a tile layer
+}
+
+
+// Add Layer Control
+L.control.layers(/*baseLayers*/null, overlays).addTo(map);
+
+
+/*--- Trying to find way to make certain layers show up only at specific zoom levels ----*/
+//if (zoom > 1 && zoom <= 5 ) lg_lordp.addTo(map); else lg_lordp.removeFrom(map);
+
 
 </script>
 
