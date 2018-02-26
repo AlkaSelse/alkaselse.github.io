@@ -45,7 +45,7 @@ var refmarker = L.marker([90, -150], { //creates marker object called 'marker' a
 	draggable: true, //makes the marker draggable
 })
 .addTo(map); //actually places onto map
-refmarker.bindPopup(''); //attaches popup object to this marker
+refmarker.bindPopup('Drag this marker to learn coordinates!').openPopup(); //attaches popup object to this marker
 
 refmarker.on('dragend', function(e) {
 	refmarker.getPopup().setContent('Pixels ' + map.project(refmarker.getLatLng(), map.getMaxZoom().toString()))
@@ -53,8 +53,8 @@ refmarker.on('dragend', function(e) {
 })
 
 //Pixels
-var klanding = L.marker(map.unproject([4000, 3984], map.getMaxZoom()));
-klanding.bindPopup('<b>Test marker!</b>');
+var klanding = L.marker(map.unproject([4659, 5413], map.getMaxZoom()));
+klanding.bindPopup("<b>King's Landing</b>");
 klanding.on('mouseover', function (e) {this.openPopup();});
 klanding.on('mouseout', function (e) {this.closePopup();});
 
@@ -70,7 +70,11 @@ winterfell.on('mouseover', function (e) {this.openPopup();});
 winterfell.on('mouseout', function (e) {this.closePopup();});
 
 //The Iron Islands
-var pyke = L.marker(map.unproject([4032, 4000], map.getMaxZoom()));
+var pyke = L.marker(map.unproject([2819, 4267], map.getMaxZoom()));
+pyke.bindPopup('<b>Pyke</b>');
+pyke.on('mouseover', function (e) {this.openPopup();});
+pyke.on('mouseout', function (e) {this.closePopup();});
+
 
 //The Riverlands
 
