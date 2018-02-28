@@ -65,12 +65,41 @@ var pyke_icon = L.icon({
 	iconUrl: 'images/pyke-icon.png',
 	iconSize: [38, 35],
 	iconAnchor: [19, 35],
-	popupAnchor: [0, -33],
+	popupAnchor: [0, -35],
 	shadowUrl: 'images/pyke-icon-shadow.png',
 	shadowSize: [55, 33],
 	shadowAnchor: [19, 33]
 })
 
+var rank1_icon = L.icon({
+	iconUrl: 'images/rank1-icon.png',
+	iconSize: [19, 21],
+	iconAnchor: [10, 21],
+	popupAnchor: [0, -21],
+	shadowUrl: 'images/rank1-icon-shadow.png',
+	shadowSize: [36, 20],
+	shadowAnchor: [10, 20]
+})
+
+var rank2_icon = L.icon({
+	iconUrl: 'images/rank2-icon.png',
+	iconSize: [29, 22],
+	iconAnchor: [15, 22],
+	popupAnchor: [0, -22],
+	shadowUrl: 'images/rank2-icon-shadow.png',
+	shadowSize: [48, 24],
+	shadowAnchor: [15, 24]
+})
+
+var rank3_icon = L.icon({
+	iconUrl: 'images/rank3-icon.png',
+	iconSize: [27, 28],
+	iconAnchor: [13, 28],
+	popupAnchor: [0, -28],
+	shadowUrl: 'images/rank3-icon-shadow.png',
+	shadowSize: [47, 22],
+	shadowAnchor: [15, 20]
+})
 
 // Markers and Popups
 // LatLng
@@ -104,52 +133,52 @@ winterfell.on('mouseover', function (e) {this.openPopup();});
 winterfell.on('mouseout', function (e) {this.closePopup();});
 
 	// Greater Houses
-	var barrowton = L.marker(map.unproject([3394, 2738], map.getMaxZoom()));
+	var barrowton = L.marker(map.unproject([3394, 2738], map.getMaxZoom()), {icon: rank3_icon});
 	barrowton.bindPopup('<b>Barrowton</b>');
 	barrowton.on('mouseover', function (e) {this.openPopup();});
 	barrowton.on('mouseout', function (e) {this.closePopup();});
 
-	var dmotte = L.marker(map.unproject([3362, 1660], map.getMaxZoom()));
+	var dmotte = L.marker(map.unproject([3362, 1660], map.getMaxZoom()), {icon: rank3_icon});
 	dmotte.bindPopup('<b>Deepwood Motte</b>');
 	dmotte.on('mouseover', function (e) {this.openPopup();});
 	dmotte.on('mouseout', function (e) {this.closePopup();});
 
-	var hornwood = L.marker(map.unproject([3973, 1998], map.getMaxZoom()));
+	var hornwood = L.marker(map.unproject([4672, 2165], map.getMaxZoom()), {icon: rank3_icon});
 	hornwood.bindPopup('<b>Hornwood</b>');
 	hornwood.on('mouseover', function (e) {this.openPopup();});
 	hornwood.on('mouseout', function (e) {this.closePopup();});
 
-	var karhold = L.marker(map.unproject([5366, 1550], map.getMaxZoom()));
+	var karhold = L.marker(map.unproject([5366, 1550], map.getMaxZoom()), {icon: rank3_icon});
 	karhold.bindPopup('<b>Karhold</b>');
 	karhold.on('mouseover', function (e) {this.openPopup();});
 	karhold.on('mouseout', function (e) {this.closePopup();});
 
-	var wharbor = L.marker(map.unproject([4440, 2842], map.getMaxZoom()));
+	var wharbor = L.marker(map.unproject([4440, 2842], map.getMaxZoom()), {icon: rank3_icon});
 	wharbor.bindPopup('<b>White Harbor</b>');
 	wharbor.on('mouseover', function (e) {this.openPopup();});
 	wharbor.on('mouseout', function (e) {this.closePopup();});
 
-	var bisland = L.marker(map.unproject([3274, 1156], map.getMaxZoom()));
+	var bisland = L.marker(map.unproject([3274, 1156], map.getMaxZoom()), {icon: rank3_icon});
 	bisland.bindPopup('<b>Bear Island</b>');
 	bisland.on('mouseover', function (e) {this.openPopup();});
 	bisland.on('mouseout', function (e) {this.closePopup();});
 
-	var gwatch = L.marker(map.unproject([3874, 3526], map.getMaxZoom()));
+	var gwatch = L.marker(map.unproject([3874, 3526], map.getMaxZoom()), {icon: rank3_icon});
 	gwatch.bindPopup('<b>Greywater Watch</b>');
 	gwatch.on('mouseover', function (e) {this.openPopup();});
 	gwatch.on('mouseout', function (e) {this.closePopup();});
 
-	var rills = L.marker(map.unproject([2818, 2792], map.getMaxZoom()));
+	var rills = L.marker(map.unproject([2818, 2792], map.getMaxZoom()), {icon: rank3_icon});
 	rills.bindPopup('<b>The Rills</b>');
 	rills.on('mouseover', function (e) {this.openPopup();});
 	rills.on('mouseout', function (e) {this.closePopup();});
 
-	var dreadfort = L.marker(map.unproject([4822, 1886], map.getMaxZoom()));
+	var dreadfort = L.marker(map.unproject([4822, 1886], map.getMaxZoom()), {icon: rank3_icon});
 	dreadfort.bindPopup('<b>Dreadfort</b>');
 	dreadfort.on('mouseover', function (e) {this.openPopup();});
 	dreadfort.on('mouseout', function (e) {this.closePopup();});
 
-	var lhearth = L.marker(map.unproject([4638, 1208], map.getMaxZoom()));
+	var lhearth = L.marker(map.unproject([4638, 1208], map.getMaxZoom()), {icon: rank3_icon});
 	lhearth.bindPopup('<b>Last Hearth</b>');
 	lhearth.on('mouseover', function (e) {this.openPopup();});
 	lhearth.on('mouseout', function (e) {this.closePopup();});
